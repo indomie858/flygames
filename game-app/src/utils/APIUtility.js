@@ -41,7 +41,7 @@ class APIUtility {
         await this.setToken();
 
         // This is where we can tweak the API call to get different results.
-        const body = "fields name, rating, total_rating;where total_rating > 90 & release_dates.date > 1609459231;sort total_rating desc;limit 10;"
+        const body = "fields name, cover.url, rating, total_rating;where total_rating > 90 & release_dates.date > 1609459231;sort total_rating desc;limit 10;"
         return axios.post('https://flygame-igdb-proxy.herokuapp.com/https://api.igdb.com/v4/games', body, {
             headers: {
                 'Client-ID': CLIENT_ID,
@@ -50,6 +50,7 @@ class APIUtility {
             }
         })
         .then(function (response) {
+            console.log(response.data);
             return response.data;
         })
         .catch(function (error) {
