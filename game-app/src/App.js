@@ -23,6 +23,7 @@ class App extends Component {
           {this.state.top10games.map(game => 
               <li>
                 {game.name}
+                {/* {game.cover.url} This is the name to access urls for cover images */}
               </li>
           )}
         </header>
