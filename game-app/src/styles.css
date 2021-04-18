@@ -1,0 +1,60 @@
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+/*************************** Nav-Bar ***************************/
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 10%;
+}
+
+.nav-bar-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-bar-right {
+  display: flex;
+}
+
+.logo {
+  width: 50px;
+}
+/******************************************************/
+
+/*************************** Grid ***************************/
+.grid {
+  max-width: 1280px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  grid-gap: 40px;
+  position: relative;
+  margin: auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+  }
+}
+@media screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+/******************************************************/
