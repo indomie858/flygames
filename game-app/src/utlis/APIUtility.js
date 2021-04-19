@@ -54,7 +54,7 @@ class APIUtility {
 
     // This is where we can tweak the API call to get different results.
     const body =
-      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human; limit 25;`;
+      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; limit 25;`;
     
     return this.makeRequest(body);
   }
