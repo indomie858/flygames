@@ -3,7 +3,6 @@ import APIUtility from "../utils/APIUtility";
 
 const GamePage = ({ gameID }) => {
   const [gameInfo, setGameInfo] = useState([])
-  const [loading, setLoading] = useState(true)
 
   const getScreenShot720p = (imageURL) => {
     const regex = /t_thumb/;
