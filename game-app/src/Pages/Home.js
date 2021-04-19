@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import APIUtility from "../utlis/APIUtility";
+import APIUtility from "../utils/APIUtility";
 import GameCard from "../Components/GameCard";
 import Spinner from "../Components/Spinner";
 

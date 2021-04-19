@@ -34,6 +34,16 @@ class APIUtility {
       });
   }
 
+  async getGameInfo(gameID) {
+    await this.setToken();
+    // Get game info for the single game page from a game ID.
+    const body = `
+      fields name;
+      where id = ${gameID};
+    `
+    return this.makeRequest(body);
+  }
+
   async getTop10Games() {
     // Gets the top 10 games,
     // for use in the main landing page.
