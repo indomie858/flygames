@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../images/logo.png";
+import { navigate } from "@reach/router"
 
 
 const Navbar = ({ onSearch }) => {
@@ -11,11 +12,11 @@ const Navbar = ({ onSearch }) => {
     e.preventDefault();
 
     if (!inputText) {
-      alert('Please enter the game title.');
+      alert('Please enter the game title or keyword.');
       return
     }
-    //passes game title to searchGame function
-    onSearch(inputText);
+    //navigates to search page and passes search query name
+    navigate(`/searchResults/${inputText}`);
     //clears search when submit is clicked
     setInputText('');
   }
