@@ -5,7 +5,7 @@ import Home from "./Pages/Home";
 import GamePage from "./Pages/GamePage";
 import Navbar from "./Components/Navbar";
 import "./styles.css";
-import APIUtility from "./utlis/APIUtility";
+import APIUtility from "./utils/APIUtility";
 
 
 const App = () => {
