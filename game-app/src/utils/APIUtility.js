@@ -38,10 +38,11 @@ class APIUtility {
     await this.setToken();
     // Get game info for the single game page from a game ID.
     const body = `
-      fields name;
+      fields name, summary, 
+      screenshots.url;
       where id = ${gameID};
     `
-    return this.makeRequest(body);
+    return this.makeRequest(body)
   }
 
   async getTop10Games() {
