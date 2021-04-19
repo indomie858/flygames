@@ -28,7 +28,7 @@ const Navbar = ({ onSearch }) => {
       </div>
       <div className="nav-bar-right">
         {/* <div>Search bar</div> */}
-        <div>dropdown</div>
+        {/* <div>dropdown</div> */}
 
         {/* form for searching games */}
         <form onSubmit={onSubmit}>
@@ -37,6 +37,14 @@ const Navbar = ({ onSearch }) => {
             placeholder='Search'
             value={inputText}
             onChange={(e) => setInputText(e.target.value)} />
+
+          <select id="categories">
+            <option value="all">All</option>
+            <option value="Action">Action</option>
+            <option value="RPG">RPG</option>
+            <option value="Simulation">Simulation</option>
+          </select>
+
           <input type='submit' value='Search Game' />
         </form>
 
