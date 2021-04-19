@@ -63,6 +63,37 @@ class APIUtility {
         console.log(error);
       });
   }
+
+  async searchForGame(gameTitle) {
+    // searches for game using string title
+    // for use in search bar
+
+    await this.setToken();
+
+    // This is where we can tweak the API call to get different results.
+    const body =
+      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human; limit 25;`;
+    return axios
+      .post(
+        "https://flygame-igdb-proxy.herokuapp.com/https://api.igdb.com/v4/games",
+        body,
+        {
+          headers: {
+            "Client-ID": CLIENT_ID,
+            Authorization: "Bearer " + this.token,
+            "Content-Type": "text/plain",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
 }
 
 export default APIUtility;
