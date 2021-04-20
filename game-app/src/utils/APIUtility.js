@@ -53,19 +53,45 @@ class APIUtility {
 
     // This is where we can tweak the API call to get different results.
     const body =
-      "fields name, cover.url, rating, total_rating;where total_rating > 90 & release_dates.date > 1609459231;sort total_rating desc;limit 10;";
+      "fields name, cover.url, rating, total_rating, release_dates.human;where total_rating > 90 & release_dates.date > 1609459231;sort total_rating desc;limit 10;";
     return this.makeRequest(body);
   }
 
-  async searchForGame(gameTitle) {
-    // searches for game using string title
+  async searchGameByTitle(gameTitle) {
+    // searches for game using title only
     // for use in search bar
 
     await this.setToken();
 
     // This is where we can tweak the API call to get different results.
     const body =
-      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; limit 25;`;
+      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; limit 40;`;
+    
+    return this.makeRequest(body);
+  }
+
+  async searchGameByTitleAndGenre(gameTitle, genre) {
+    // searches for game using both title and genre
+    // for use in search bar
+
+    await this.setToken();
+
+    // This is where we can tweak the API call to get different results.
+    const body =
+      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; where genres.name = "${genre}"; limit 40;`;
+    
+    return this.makeRequest(body);
+  }
+
+  async searchGameByGenre(genre) {
+    // searches for game using genre only
+    // for use in search bar
+
+    await this.setToken();
+
+    // This is where we can tweak the API call to get different results.
+    const body =
+      `fields name, cover.url, rating, total_rating, release_dates.human, genres.name; where total_rating > 90 & genres.name = "${genre}"; limit 40;`;
     
     return this.makeRequest(body);
   }

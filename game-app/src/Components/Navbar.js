@@ -4,20 +4,26 @@ import { navigate } from "@reach/router"
 import { Link } from "@reach/router";
 
 
-const Navbar = ({ onSearch }) => {
+const Navbar = () => {
   // state for search bar input
-  const [inputText, setInputText] = useState('')
+  const [inputText, setInputText] = useState('');
+
+  const [genre, setGenre] = useState('');
 
   const onSubmit = (e) => {
     // comment this line if we want the search to refresh the page when pressing submit
     //e.preventDefault();
 
-    if (!inputText) {
-      alert('Please enter the game title or keyword.');
-      return
+    // checks if search and/or genre category has been filled. navigates to correct url
+    if (!inputText && !genre) {
+      e.preventDefault();
+      alert('Please enter title/keyword, or select a category');
+    } else if (inputText && !genre) {
+      navigate(`/searchResults/${inputText}`);
+    } else {
+      navigate(`/searchResults/${inputText}+${genre}`);
     }
-    //navigates to search page and passes search query name
-    navigate(`/searchResults/${inputText}`);
+    
     //clears search when submit is clicked
     setInputText('');
   }
@@ -39,11 +45,24 @@ const Navbar = ({ onSearch }) => {
             value={inputText}
             onChange={(e) => setInputText(e.target.value)} />
 
-          <select id="categories">
+          <select id="categories" value={genre} onChange={(e) => setGenre(e.target.value)}>
+            <option value="">Pick a Genre</option>
             <option value="all">All</option>
-            <option value="Action">Action</option>
-            <option value="RPG">RPG</option>
-            <option value="Simulation">Simulation</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Arcade">Arcade</option>
+            <option value="Fighting">Fighting</option>
+            <option value="Indie">Indie</option>
+            <option value="MOBA">MOBA</option>
+            <option value="Music">Music</option>
+            <option value="Platform">Platform</option>
+            <option value="Puzzle">Puzzle</option>
+            <option value="Racing">Racing</option>
+            <option value="Role-playing (RPG)">Role-playing (RPG)</option>
+            <option value="Shooter">Shooter</option>
+            <option value="Simulator">Simulator</option>
+            <option value="Sport">Sport</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Tactical">Tactical</option>
           </select>
 
           <input type='submit' value='Search Game' />

@@ -19,7 +19,7 @@ const SearchPage = ({ searchQuery }) => {
     useEffect(() => {
         async function fetchGames() {
             let apiUtil = new APIUtility();
-            const response = await apiUtil.searchForGame(searchQuery);
+            const response = await apiUtil.searchGameByTitle(searchQuery);
             console.log("Response", response);
             setGames(response);
             setLoading(false);
