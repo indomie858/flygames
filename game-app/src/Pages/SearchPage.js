@@ -3,6 +3,7 @@ import APIUtility from "../utils/APIUtility";
 import GameCard from "../Components/GameCard";
 import Spinner from "../Components/Spinner";
 
+
 const SearchPage = ({ searchQuery }) => {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
