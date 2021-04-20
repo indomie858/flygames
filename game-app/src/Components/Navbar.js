@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../images/logo.png";
 import { navigate } from "@reach/router"
+import { Link } from "@reach/router";
 
 
 const Navbar = ({ onSearch }) => {
@@ -24,8 +25,7 @@ const Navbar = ({ onSearch }) => {
   return (
     <div className="nav-bar">
       <div className="nav-bar-left">
-        <img src={Logo} alt="FlyGames" className="logo"></img>
-        fly games
+        <Link to={'/'}><img src={Logo} alt="FlyGames" className="logo" ></img></Link>
       </div>
       <div className="nav-bar-right">
         {/* <div>Search bar</div> */}

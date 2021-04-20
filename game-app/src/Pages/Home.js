@@ -27,8 +27,11 @@ const Home = () => {
     fetchTopGames();
   }, []);
 
+  let date = new Date();
+
   return (
     <>
+      <h1>Top 10 Games of {date.getFullYear()}</h1>
       <div className="grid">
         {topGames.map((game) => (
           <GameCard
