@@ -9,7 +9,7 @@ const Navbar = ({ onSearch }) => {
 
   const onSubmit = (e) => {
     // comment this line if we want the search to refresh the page when pressing submit
-    e.preventDefault();
+    //e.preventDefault();
 
     if (!inputText) {
       alert('Please enter the game title or keyword.');
