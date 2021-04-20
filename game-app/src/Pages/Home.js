@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NoImage from "../images/no-image-available.png";
 import APIUtility from "../utils/APIUtility";
 import GameCard from "../Components/GameCard";
 import Spinner from "../Components/Spinner";
@@ -26,13 +27,16 @@ const Home = () => {
     fetchTopGames();
   }, []);
 
+  let date = new Date();
+
   return (
     <>
+      <h1>Top 10 Games of {date.getFullYear()}</h1>
       <div className="grid">
         {topGames.map((game) => (
           <GameCard
             gameName={game.name}
-            imageUrl={getCoverSizeBig(game.cover.url)}
+            imageUrl={getCoverSizeBig(game.cover ? game.cover.url : `${NoImage}`)}
             gameRating={game.rating}
             gameID={game.id}
           />
