@@ -38,8 +38,14 @@ class APIUtility {
     await this.setToken();
     // Get game info for the single game page from a game ID.
     const body = `
-      fields name, summary, 
-      screenshots.url;
+      fields name, 
+      summary, 
+      aggregated_rating,
+      similar_games, 
+      screenshots.url,
+      involved_companies,
+      release_dates,
+      genres; 
       where id = ${gameID};
     `
     return this.makeRequest(body)

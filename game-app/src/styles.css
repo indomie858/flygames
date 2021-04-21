@@ -1,5 +1,6 @@
 html {
   font-family: "Roboto", sans-serif;
+  overflow-x: hidden;
 }
 
 /*************************** Nav-Bar ***************************/
@@ -58,3 +59,39 @@ html {
   }
 }
 /******************************************************/
+
+/**************** Game Page *******************/
+
+.main-container {
+  max-width: 1280px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+
+.horizontal-flex {
+  display: flex;
+}
+
+.flex-left {
+  justify-content: left;
+  flex-basis: 50%;
+}
+
+.flex-right {
+  justify-content: right;
+  flex-basis: 50%;
+}
+
+
+/**************** Button Generic  *******************/
+.button-styled {
+    background-color: #fff148;
+    border: unset;
+    cursor: pointer;
+    border: 3px solid #52deff;
+    border-radius: 10px;
+    padding: 15px 10px;
+}
