@@ -6,6 +6,7 @@ export const StyledCarousel = styled.div`
     max-width: 1280px;
     margin: 0 auto;
     position: relative;
+    overflow: hidden;
     .carousel-flex {
         flex-flow: row nowrap;
         display: flex; 
@@ -29,6 +30,18 @@ const Carousel = (props) => {
     const [selectedScreenIndex, setSelectedScreenIndex] = useState(0)
     const [loading, setLoading] = useState(true)
     const numScreenshots = props.screenshots.length
+    const [xPositions, setXPositions] = useState([])
+    
+    function initializeXPositions(screenshotWidths) {
+        let positions = new Array(props.screenshots.length)
+        positions[0] = 0
+        for (let i = 1; i < props.screenshots.length; i++) {
+            positions[i] = positions[i - 1] + screenshotWidths[i - 1]
+        }
+        console.log(positions)
+        console.log(props.screenshots)
+        return positions
+    }
 
     const getScreenShot720p = (imageURL) => {
         const regex = /t_thumb/;
@@ -57,10 +70,17 @@ const Carousel = (props) => {
         // Preload screenshots as image objects.
         // This forces the browser to load all images and cache them
         // Before user interaction.
-        props.screenshots.forEach((screenshot) => {
-            const img = new Image();
-            img.src = screenshot.url
-        })
+        // This also sets screenshot widths into an array,
+        // so that we can calculate carousel positions.
+        let screenshotWidths = props.screenshots.map(function (screenshot) {
+            const img = new Image()
+            img.src = getScreenShot720p(screenshot.url)
+            return img.width
+            }
+        )
+
+     
+        setXPositions(initializeXPositions(screenshotWidths))
 
         // Release the loading spinner
         setLoading(false)
@@ -73,7 +93,7 @@ const Carousel = (props) => {
         </button>
         <div className="carousel-flex"
             style= { {
-                transform: `translate(${-selectedScreenIndex * 1280}px, 0px)`
+                transform: `translate(${-xPositions[selectedScreenIndex]}px, 0px)`
                 }
             }>
             {props.screenshots.map((screenshot) =>
