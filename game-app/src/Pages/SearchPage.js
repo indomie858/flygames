@@ -4,6 +4,7 @@ import APIUtility from "../utils/APIUtility";
 import GameCard from "../Components/GameCard";
 import Spinner from "../Components/Spinner";
 
+
 const SearchPage = ({ searchQuery }) => {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -19,7 +20,7 @@ const SearchPage = ({ searchQuery }) => {
     useEffect(() => {
         async function fetchGames() {
             let apiUtil = new APIUtility();
-            const response = await apiUtil.searchForGame(searchQuery);
+            const response = await apiUtil.searchGameByTitle(searchQuery);
             console.log("Response", response);
             setGames(response);
             setLoading(false);
