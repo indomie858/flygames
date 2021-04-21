@@ -40,10 +40,12 @@ class APIUtility {
     const body = `
       fields name, 
       summary, 
-      rating, 
+      aggregated_rating,
       similar_games, 
       screenshots.url,
-      screenshots.width; 
+      involved_companies,
+      release_dates,
+      genres; 
       where id = ${gameID};
     `
     return this.makeRequest(body)

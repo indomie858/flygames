@@ -60,14 +60,29 @@ html {
 }
 /******************************************************/
 
-/**************** Game Page Container *******************/
+/**************** Game Page *******************/
 
-.container {
+.main-container {
   max-width: 1280px;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+}
+
+
+.horizontal-flex {
+  display: flex;
+}
+
+.flex-left {
+  justify-content: left;
+  flex-basis: 50%;
+}
+
+.flex-right {
+  justify-content: right;
+  flex-basis: 50%;
 }
 
 

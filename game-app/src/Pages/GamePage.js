@@ -5,7 +5,7 @@ import Spinner from "../Components/Spinner"
 
 const GamePage = ({ gameID }) => {
   const [gameInfo, setGameInfo] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function requestGameInfo() {
@@ -15,27 +15,48 @@ const GamePage = ({ gameID }) => {
       setGameInfo(response[0])
     }
     requestGameInfo() 
-    console.log(gameInfo)
+    setLoading(false)
   }, [])
 
-  return (
-    <>
-      {gameInfo.screenshots ? 
-        <Carousel screenshots={gameInfo.screenshots} /> : <Spinner />}
-        <main className="container">
-          <h1>{gameInfo.name}</h1>
-          <p>Rating: {gameInfo.rating}</p>
-          <p>
-            {gameInfo.summary}
-          </p>
-          <h3>Similar Games</h3>
-          <div className="grid">
-                {gameInfo.similar_games ? gameInfo.similar_games.map((game_id) => (
-                    <div>{game_id}</div>
-                )) : <Spinner />}
-            </div>
-        </main>
-    </>
+  return ( 
+          <>
+            {gameInfo.screenshots ? <Carousel screenshots={gameInfo.screenshots} /> : <Spinner />}
+            <main className="main-container">
+              <div>
+                  {gameInfo.aggregated_rating | gameInfo.genres ? 
+                    gameInfo.genres.map((genre) => <span>{genre}</span>) :
+                    <Spinner />}
+              </div>
+              <div class="horizontal-flex">
+                <div class="flex-left">
+                  <h1>
+                    {gameInfo.name}
+                  </h1>
+                  <p>
+                    {gameInfo.summary}
+                  </p>
+                </div>
+                <div class="flex-right">
+                    <h4>Companies</h4>
+                      {gameInfo.involved_companies}
+                    <h4>Release Date</h4>
+                      {gameInfo.release_dates}
+                    <h4>Platforms</h4>
+                      {gameInfo.platforms}
+                </div>
+              </div>
+              <div class="similar-games">
+                <h3>Similar Games</h3>
+                <div>
+                  <div className="grid">
+                        {gameInfo.similar_games ? gameInfo.similar_games.map((game_id) => (
+                            <div>{game_id}</div>
+                        )) : <Spinner />}
+                  </div>
+                </div>
+              </div>
+            </main>
+        </>
   );
 };
 

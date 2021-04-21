@@ -11,13 +11,20 @@ export const StyledCarousel = styled.div`
         flex-flow: row nowrap;
         display: flex; 
         transition: all 0.75s ease-in;
+        justify-content: center;
+    }
+
+    img {
+        max-width: 100%;
     }
 
     .button-styled {
         z-index: 1;
-        top: 50%;
+        top: calc(50% - 26px);
         position: absolute;
+        box-sizing: border-box;
     }
+    
     .button-left {
         left: 20px;
     }
@@ -30,7 +37,6 @@ const Carousel = (props) => {
     const [selectedScreenIndex, setSelectedScreenIndex] = useState(0)
     const [loading, setLoading] = useState(true)
     const numScreenshots = props.screenshots.length
-    const [xPositions, setXPositions] = useState([])
     
     function initializeXPositions(screenshotWidths) {
         let positions = new Array(props.screenshots.length)
@@ -64,7 +70,6 @@ const Carousel = (props) => {
         )
     }
     
-
     // This useeffect runs once (similar to componentdidmount)
     useEffect(() => {
         // Preload screenshots as image objects.
@@ -79,9 +84,6 @@ const Carousel = (props) => {
             }
         )
 
-     
-        setXPositions(initializeXPositions(screenshotWidths))
-
         // Release the loading spinner
         setLoading(false)
     },[])
@@ -91,14 +93,8 @@ const Carousel = (props) => {
         <button class="button-styled button-left" onClick={prevScreen}>
             &lt;
         </button>
-        <div className="carousel-flex"
-            style= { {
-                transform: `translate(${-xPositions[selectedScreenIndex]}px, 0px)`
-                }
-            }>
-            {props.screenshots.map((screenshot) =>
-                <img src={getScreenShot720p(screenshot.url)} />)
-            }
+        <div className="carousel-flex">
+            <img src={getScreenShot720p(props.screenshots[selectedScreenIndex].url)} />
         </div>
         <button class="button-styled button-right" onClick={nextScreen}>
             &gt;
