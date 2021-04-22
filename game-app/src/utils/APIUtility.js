@@ -72,7 +72,7 @@ class APIUtility {
     // This is where we can tweak the API call to get different results.
     const body =
       `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; limit 40;`;
-    
+
     return this.makeRequest(body);
   }
 
@@ -83,9 +83,14 @@ class APIUtility {
     await this.setToken();
 
     // This is where we can tweak the API call to get different results.
-    const body =
-      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; where genres.name = "${genre}"; limit 40;`;
-    
+    let body =
+      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; where genres.name = "${genre}"; limit 50;`;
+
+    if (genre === 'all') {
+      body =
+        `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; limit 50;`;
+    }
+
     return this.makeRequest(body);
   }
 
@@ -96,9 +101,14 @@ class APIUtility {
     await this.setToken();
 
     // This is where we can tweak the API call to get different results.
-    const body =
-      `fields name, cover.url, rating, total_rating, release_dates.human, genres.name; where total_rating > 90 & genres.name = "${genre}"; limit 40;`;
-    
+    let body =
+      `fields name, cover.url, rating, total_rating, release_dates.human, genres.name; where genres.name = "${genre}"; limit 50;`;
+
+    if (genre === 'all') {
+      body =
+        "fields name, cover.url, rating, total_rating, release_dates.human; sort total_rating desc;limit 50;";
+    }
+
     return this.makeRequest(body);
   }
 
@@ -107,7 +117,7 @@ class APIUtility {
     await this.setToken();
 
     const body = bodyArg;
-    
+
     return axios
       .post(
         "https://flygame-igdb-proxy.herokuapp.com/https://api.igdb.com/v4/games",

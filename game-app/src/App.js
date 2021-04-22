@@ -16,7 +16,7 @@ const App = () => {
       <Router>
         <Home path="/" />
         <GamePage path="/:gameID" />
-        <SearchPage path="/searchResults/:searchQuery" />
+        <SearchPage path="/searchResults/:gameTitle/:gameGenre" />
       </Router>
     </>
   );

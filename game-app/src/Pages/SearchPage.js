@@ -5,7 +5,7 @@ import GameCard from "../Components/GameCard";
 import Spinner from "../Components/Spinner";
 
 
-const SearchPage = ({ searchQuery }) => {
+const SearchPage = ({ gameTitle, gameGenre }) => {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -20,7 +20,15 @@ const SearchPage = ({ searchQuery }) => {
     useEffect(() => {
         async function fetchGames() {
             let apiUtil = new APIUtility();
-            const response = await apiUtil.searchGameByTitle(searchQuery);
+            let response;
+            
+            if (gameTitle === 'bygenre') {
+                response = await apiUtil.searchGameByGenre(gameGenre);
+            } else if (gameGenre === 'all'){
+                response = await apiUtil.searchGameByTitle(gameTitle);
+            } else {
+                response = await apiUtil.searchGameByTitleAndGenre(gameTitle, gameGenre);
+            }
             console.log("Response", response);
             setGames(response);
             setLoading(false);
@@ -30,7 +38,7 @@ const SearchPage = ({ searchQuery }) => {
 
     return (
         <>
-            <h1>Search Results: "{searchQuery}"</h1>
+            <h1>Search Results {gameTitle === 'bygenre' ? 'Genre:' : `${gameTitle}`} {gameGenre}</h1>
             <div className="grid">
                 {games.map((game) => (
                     <GameCard
