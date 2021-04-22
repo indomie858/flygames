@@ -8,7 +8,7 @@ const Navbar = () => {
   // state for search bar input
   const [inputText, setInputText] = useState('');
 
-  const [genre, setGenre] = useState('');
+  const [genre, setGenre] = useState('all');
 
   const onSubmit = (e) => {
     // comment this line if we want the search to refresh the page when pressing submit
@@ -18,11 +18,17 @@ const Navbar = () => {
     if (!inputText && !genre) {
       e.preventDefault();
       alert('Please enter title/keyword, or select a category');
-    } else if (inputText && !genre) {
-      navigate(`/searchResults/${inputText}`);
+    } else if (!inputText && genre) {
+      navigate(`/searchResults/bygenre/${genre}`);
     } else {
-      navigate(`/searchResults/${inputText}+${genre}`);
+      navigate(`/searchResults/${inputText}/${genre}`);
     }
+    
+    // if (inputText && !genre) {
+    //   navigate(`/searchResults/${inputText}`);
+    // } else {
+    //   navigate(`/searchResults/${inputText}+${genre}`);
+    // }
     
     //clears search when submit is clicked
     setInputText('');
@@ -46,8 +52,7 @@ const Navbar = () => {
             onChange={(e) => setInputText(e.target.value)} />
 
           <select id="categories" value={genre} onChange={(e) => setGenre(e.target.value)}>
-            <option value="">Pick a Genre</option>
-            <option value="all">All</option>
+            <option value="all">All Genres</option>
             <option value="Adventure">Adventure</option>
             <option value="Arcade">Arcade</option>
             <option value="Fighting">Fighting</option>
