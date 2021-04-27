@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import APIUtility from "../utils/APIUtility";
 import Carousel from "../Components/Carousel"
 import Spinner from "../Components/Spinner"
+import { createPortal } from "react-dom";
 
 const GamePage = ({ gameID }) => {
   const [gameInfo, setGameInfo] = useState([])
+  const [companies, setCompanies] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -13,6 +15,10 @@ const GamePage = ({ gameID }) => {
       let response = await apiUtil.getGameInfo(gameID)
       setLoading(true)
       setGameInfo(response[0])
+      
+      //let companyIDs = response[0].involved_companies.map()
+      let companyObjects = await apiUtil.getCompanyInfoFromIDArray(response[0].involved_companies)
+      setCompanies(companyObjects)
     }
     requestGameInfo() 
     setLoading(false)
@@ -24,7 +30,7 @@ const GamePage = ({ gameID }) => {
             <main className="main-container">
               <div>
                   {gameInfo.aggregated_rating | gameInfo.genres ? 
-                    gameInfo.genres.map((genre) => <span>{genre}</span>) :
+                    gameInfo.genres.map((genre) => <span>{genre.name}</span>) :
                     <Spinner />}
               </div>
               <div class="horizontal-flex">
@@ -38,7 +44,11 @@ const GamePage = ({ gameID }) => {
                 </div>
                 <div class="flex-right">
                     <h4>Companies</h4>
-                      {gameInfo.involved_companies}
+                    <ul>
+                      {
+                        companies.map((company) => <li>{company.name}</li>)
+                      }
+                    </ul>
                     <h4>Release Date</h4>
                       {gameInfo.release_dates}
                     <h4>Platforms</h4>
