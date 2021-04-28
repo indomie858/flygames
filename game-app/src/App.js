@@ -1,26 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React from "react";
+import { Router } from "@reach/router";
+import Home from "./Pages/Home";
+import GamePage from "./Pages/GamePage";
+import SearchPage from "./Pages/SearchPage";
+import Navbar from "./Components/Navbar";
+import "./styles.css";
+import APIUtility from "./utils/APIUtility";
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello World! I'm supposed to be a game website soon.</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Router>
+        <Home path="/" />
+        <GamePage path="/:gameID" />
+        <SearchPage path="/searchResults/:gameTitle/:gameGenre" />
+      </Router>
+    </>
   );
-}
+};
+
 
 export default App;
