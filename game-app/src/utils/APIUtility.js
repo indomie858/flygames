@@ -35,7 +35,7 @@ class APIUtility {
   }
 
   async getGameInfo(gameID) {
-    await this.setToken();
+    await this.setToken()
     // Get game info for the single game page from a game ID.
     const body = `
       fields name, 
@@ -43,13 +43,57 @@ class APIUtility {
       aggregated_rating,
       similar_games, 
       screenshots.url,
-      involved_companies,
-      release_dates,
-      genres; 
+      involved_companies.company,
+      release_dates.human,
+      genres.name,
+      platforms.*; 
       where id = ${gameID};
     `
-    return this.makeRequest(body)
+    let gameFields = await this.makeRequest(body)
+    return gameFields
   }
+
+  async getCompanyInfoFromIDArray(involvedCompanies) {
+    // Retrieve a list of company IDs from a list of involved_company IGDB objects
+    await this.setToken()
+
+    let companyIDs = []
+    for (const involvedCompany of involvedCompanies) {
+      companyIDs.push(involvedCompany.company)
+    }
+    let companyIDStrings = companyIDs.join(",")
+    let body = `
+      fields name;
+      where id = (${companyIDStrings});
+    `
+    let companyObjects = await this.makeCompanyRequest(body)
+    return companyObjects
+  }
+
+  
+  async makeCompanyRequest(body) {
+    return axios
+      .post(
+        "https://flygame-igdb-proxy.herokuapp.com/https://api.igdb.com/v4/companies",
+        body,
+        {
+          headers: {
+            "Client-ID": CLIENT_ID,
+            Authorization: "Bearer " + this.token,
+            "Content-Type": "text/plain",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
 
   async getTop10Games() {
     // Gets the top 10 games,
@@ -112,7 +156,24 @@ class APIUtility {
     return this.makeRequest(body);
   }
 
+  async getGamesByIDs(gameIDs) {
+    // Takes a list of game IDs,
+    // and returns a response containing game objects.
+    await this.setToken();
+
+    let gameIDString = gameIDs.join(",")
+    
+    const body = `
+      fields name, cover.url, rating, total_rating, release_dates.human;
+      limit 10;
+      where id = (${gameIDString});
+    `
+    return this.makeRequest(body)
+  }
+
+
   async makeRequest(bodyArg) {
+    // Makes a request to the games endpoint.
     // generic function to make requests to igdb api
     await this.setToken();
 
