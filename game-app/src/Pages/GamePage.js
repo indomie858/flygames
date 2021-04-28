@@ -5,6 +5,16 @@ import Spinner from "../Components/Spinner";
 import GameCard from "../Components/GameCard";
 import NoImage from "../images/no-image-available.png";
 import { createPortal } from "react-dom";
+import styled from "styled-components";
+
+const StyledGenre = styled.div`
+  border: 2px solid #35373e;
+  background-color: #52deff;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 20px;
+  display: inline-block;
+`
 
 const GamePage = ({ gameID }) => {
   const [gameInfo, setGameInfo] = useState([])
@@ -44,8 +54,13 @@ const GamePage = ({ gameID }) => {
     return <>
           <Carousel screenshots={gameInfo.screenshots} />
           <main className="main-container">
-            <div>
-                { gameInfo.genres.map((genre) => <span>{genre.name}</span>) }
+            <div class="horizontal-flex">
+              <div class="flex-left horizontal-flex flex-justify-center">
+                { gameInfo.genres.map((genre) => <StyledGenre>{genre.name}</StyledGenre>) }
+              </div>
+              <div class="flex-right">
+                { gameInfo.rating }
+              </div> 
             </div>
           <div class="horizontal-flex">
               <div class="flex-left">
