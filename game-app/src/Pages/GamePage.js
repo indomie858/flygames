@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import APIUtility from "../utils/APIUtility";
-import Carousel from "../Components/Carousel"
-import Spinner from "../Components/Spinner"
+import Carousel from "../Components/Carousel";
+import Spinner from "../Components/Spinner";
+import GameCard from "../Components/GameCard";
+import NoImage from "../images/no-image-available.png";
 import { createPortal } from "react-dom";
 
 const GamePage = ({ gameID }) => {
   const [gameInfo, setGameInfo] = useState([])
   const [companies, setCompanies] = useState([])
+  const [similarGames, setSimilarGames] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -19,55 +22,76 @@ const GamePage = ({ gameID }) => {
       //let companyIDs = response[0].involved_companies.map()
       let companyObjects = await apiUtil.getCompanyInfoFromIDArray(response[0].involved_companies)
       setCompanies(companyObjects)
+
+      let similarGames = await apiUtil.getGamesByIDs(response[0].similar_games)
+      setSimilarGames(similarGames)
+      
+      setLoading(false)
     }
     requestGameInfo() 
-    setLoading(false)
   }, [])
 
-  return ( 
-          <>
-            {gameInfo.screenshots ? <Carousel screenshots={gameInfo.screenshots} /> : <Spinner />}
-            <main className="main-container">
-              <div>
-                  {gameInfo.aggregated_rating | gameInfo.genres ? 
-                    gameInfo.genres.map((genre) => <span>{genre.name}</span>) :
-                    <Spinner />}
+  const getCoverSizeBig = (imageURL) => {
+    //this function returns the big cover image url
+    const regex = /thumb/;
+    let originalImageURL = imageURL;
+    let newImageURL = originalImageURL.replace(regex, "cover_big");
+    return newImageURL;
+  };
+
+
+  function gameInfoMain() {
+    return <>
+          <Carousel screenshots={gameInfo.screenshots} />
+          <main className="main-container">
+            <div>
+                { gameInfo.genres.map((genre) => <span>{genre.name}</span>) }
+            </div>
+          <div class="horizontal-flex">
+              <div class="flex-left">
+                <h1>
+                  {gameInfo.name}
+                </h1>
+                <p>
+                  {gameInfo.summary}
+                </p>
               </div>
-              <div class="horizontal-flex">
-                <div class="flex-left">
-                  <h1>
-                    {gameInfo.name}
-                  </h1>
-                  <p>
-                    {gameInfo.summary}
-                  </p>
-                </div>
-                <div class="flex-right">
-                    <h4>Companies</h4>
+              <div class="flex-right">
+                  <h4>Companies</h4>
+                  <ul>
+                    {companies.map((company) => <li>{company.name}</li>)}
+                  </ul>
+                  <h4>Release Date</h4>
                     <ul>
-                      {
-                        companies.map((company) => <li>{company.name}</li>)
-                      }
+                    {gameInfo.release_dates[0].human}
                     </ul>
-                    <h4>Release Date</h4>
-                      {gameInfo.release_dates}
-                    <h4>Platforms</h4>
-                      {gameInfo.platforms}
+                  <h4>Platforms</h4>
+                    <ul>
+                    {gameInfo.platforms.map((platform) => <li>{platform.abbreviation}</li>)}
+                    </ul>
+            </div>
+            </div>
+            <div class="similar-games">
+              <h3>Similar Games</h3>
+              <div>
+                <div className="grid">
+                  {similarGames.map((game) => (
+                      <GameCard
+                        gameName={game.name}
+                        imageUrl={getCoverSizeBig(game.cover ? game.cover.url : `${NoImage}`)}
+                        gameRating={game.rating}
+                        gameID={game.id}
+                      />
+                    ))}
                 </div>
               </div>
-              <div class="similar-games">
-                <h3>Similar Games</h3>
-                <div>
-                  <div className="grid">
-                        {gameInfo.similar_games ? gameInfo.similar_games.map((game_id) => (
-                            <div>{game_id}</div>
-                        )) : <Spinner />}
-                  </div>
-                </div>
-              </div>
-            </main>
+            </div>
+          </main>
         </>
-  );
+  }
+
+  return ( loading ? <Spinner /> : gameInfoMain() );
+
 };
 
 export default GamePage;

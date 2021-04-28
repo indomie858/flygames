@@ -44,8 +44,9 @@ class APIUtility {
       similar_games, 
       screenshots.url,
       involved_companies.company,
-      release_dates,
-      genres.name; 
+      release_dates.human,
+      genres.name,
+      platforms.*; 
       where id = ${gameID};
     `
     let gameFields = await this.makeRequest(body)
@@ -155,8 +156,24 @@ class APIUtility {
     return this.makeRequest(body);
   }
 
+  async getGamesByIDs(gameIDs) {
+    // Takes a list of game IDs,
+    // and returns a response containing game objects.
+    await this.setToken();
+
+    let gameIDString = gameIDs.join(",")
+    
+    const body = `
+      fields name, cover.url, rating, total_rating, release_dates.human;
+      limit 10;
+      where id = (${gameIDString});
+    `
+    return this.makeRequest(body)
+  }
+
 
   async makeRequest(bodyArg) {
+    // Makes a request to the games endpoint.
     // generic function to make requests to igdb api
     await this.setToken();
 
