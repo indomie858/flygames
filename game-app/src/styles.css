@@ -76,13 +76,17 @@ html {
 }
 
 .flex-left {
-  justify-content: left;
   flex-basis: 50%;
+  flex-grow: 1;
 }
 
 .flex-right {
-  justify-content: right;
   flex-basis: 50%;
+  flex-grow: 1;
+}
+
+.flex-justify-center {
+  justify-content: center;
 }
 
 
