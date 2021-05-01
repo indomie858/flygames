@@ -39,7 +39,7 @@ const GamePage = ({ gameID }) => {
       setLoading(false)
     }
     requestGameInfo() 
-  }, [])
+  }, [gameID])
 
   const getCoverSizeBig = (imageURL) => {
     //this function returns the big cover image url
