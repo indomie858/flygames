@@ -36,7 +36,7 @@ export const StyledCarousel = styled.div`
 const Carousel = (props) => {
     const [selectedScreenIndex, setSelectedScreenIndex] = useState(0)
     const [loading, setLoading] = useState(true)
-    const numScreenshots = props.screenshots.length
+    const numScreenshots = props.screenshots != null ? props.screenshots.length : 0
     
     function initializeXPositions(screenshotWidths) {
         let positions = new Array(props.screenshots.length)
@@ -77,7 +77,7 @@ const Carousel = (props) => {
         // Before user interaction.
         // This also sets screenshot widths into an array,
         // so that we can calculate carousel positions.
-        let screenshotWidths = props.screenshots.map(function (screenshot) {
+        let screenshotWidths = props.screenshots == undefined ? 0 : props.screenshots.map(function (screenshot) {
             const img = new Image()
             img.src = getScreenShot720p(screenshot.url)
             return img.width
@@ -88,19 +88,18 @@ const Carousel = (props) => {
         setLoading(false)
     },[])
         
-
+    //not found image is a public domain placeholder
     return loading ? <Spinner /> : <StyledCarousel>
         <button class="button-styled button-left" onClick={prevScreen}>
             &lt;
         </button>
         <div className="carousel-flex">
-            <img src={getScreenShot720p(props.screenshots[selectedScreenIndex].url)} />
+            <img src={props.screenshots == undefined ? "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg" : getScreenShot720p(props.screenshots[selectedScreenIndex].url)} />
         </div>
         <button class="button-styled button-right" onClick={nextScreen}>
             &gt;
         </button>
     </StyledCarousel>
 }
-
 
 export default Carousel

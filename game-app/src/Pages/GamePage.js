@@ -49,14 +49,13 @@ const GamePage = ({ gameID }) => {
     return newImageURL;
   };
 
-
   function gameInfoMain() {
     return <>
           <Carousel screenshots={gameInfo.screenshots} />
           <main className="main-container">
             <div class="horizontal-flex">
               <div class="flex-left horizontal-flex flex-justify-center">
-                { gameInfo.genres.map((genre) => <StyledGenre>{genre.name}</StyledGenre>) }
+                { gameInfo.hasOwnProperty("genres") ? gameInfo.genres.map((genre) => <StyledGenre>{genre.name}</StyledGenre>) : null }
               </div>
               <div class="flex-right">
                 { gameInfo.rating }
@@ -74,15 +73,15 @@ const GamePage = ({ gameID }) => {
               <div class="flex-right">
                   <h4>Companies</h4>
                   <ul>
-                    {companies.map((company) => <li>{company.name}</li>)}
+                    { companies == undefined ? null : companies.map((company) => <li>{company.name}</li>)}
                   </ul>
                   <h4>Release Date</h4>
                     <ul>
-                    {gameInfo.release_dates[0].human}
+                    { gameInfo.release_dates == undefined ? null : gameInfo.release_dates[0].human}
                     </ul>
                   <h4>Platforms</h4>
                     <ul>
-                    {gameInfo.platforms.map((platform) => <li>{platform.abbreviation}</li>)}
+                    { gameInfo.platforms == null ? null : gameInfo.platforms.map((platform) => <li>{platform.abbreviation}</li>)}
                     </ul>
             </div>
             </div>
@@ -90,7 +89,7 @@ const GamePage = ({ gameID }) => {
               <h3>Similar Games</h3>
               <div>
                 <div className="grid">
-                  {similarGames.map((game) => (
+                  { similarGames == null ? null : similarGames.map((game) => (
                       <GameCard
                         gameName={game.name}
                         imageUrl={getCoverSizeBig(game.cover ? game.cover.url : `${NoImage}`)}
@@ -106,7 +105,6 @@ const GamePage = ({ gameID }) => {
   }
 
   return ( loading ? <Spinner /> : gameInfoMain() );
-
 };
 
 export default GamePage;
