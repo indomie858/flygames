@@ -46,12 +46,13 @@ const Navbar = () => {
         {/* form for searching games */}
         <form onSubmit={onSubmit}>
           <input
+            className="search"
             type='text'
             placeholder='Search'
             value={inputText}
             onChange={(e) => setInputText(e.target.value)} />
 
-          <select id="categories" value={genre} onChange={(e) => setGenre(e.target.value)}>
+          <select className='categories' id="categories" value={genre} onChange={(e) => setGenre(e.target.value)}>
             <option value="all">All Genres</option>
             <option value="Adventure">Adventure</option>
             <option value="Arcade">Arcade</option>
@@ -70,7 +71,7 @@ const Navbar = () => {
             <option value="Tactical">Tactical</option>
           </select>
 
-          <input type='submit' value='Search Game' />
+          <input type='submit' value='Search Game' className='button-styled'/>
         </form>
 
       </div>

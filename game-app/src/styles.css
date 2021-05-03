@@ -3,12 +3,24 @@ html {
   overflow-x: hidden;
 }
 
+body {
+  /* background: #52deff; */
+  background: #a8b3ba;
+}
+
+h1 {
+  text-align: center;
+  margin: 30px;
+}
+
 /*************************** Nav-Bar ***************************/
 .nav-bar {
+  /* background: #52deff; */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 10%;
+  padding: 0 10%;
+  background: #ff455c;
 }
 
 .nav-bar-left {
@@ -18,10 +30,26 @@ html {
 }
 .nav-bar-right {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
-  width: 50px;
+  width: 12%;
+}
+
+.search {
+  background: #eef6ff;
+  width: 30%;
+  padding: 15px 10px;
+  font-style: italic;
+}
+
+.categories {
+  background: #eef6ff;
+  width: 30%;
+  padding: 15px 10px;
 }
 /******************************************************/
 
@@ -63,6 +91,7 @@ html {
 /**************** Game Page *******************/
 
 .main-container {
+  background: #eef6ff;
   max-width: 1280px;
   padding: 0 20px;
   display: flex;
@@ -92,6 +121,7 @@ html {
 
 /**************** Button Generic  *******************/
 .button-styled {
+    font-weight: bold;
     background-color: #fff148;
     border: unset;
     cursor: pointer;
