@@ -56,7 +56,6 @@ const GamePage = ({ gameID }) => {
     return newImageURL;
   };
 
-
   function gameInfoMain() {
     return <>
           <Carousel screenshots={gameInfo.screenshots} />
@@ -67,7 +66,7 @@ const GamePage = ({ gameID }) => {
                   {gameInfo.name}
                 </h1>
                 <div class="flex-justify-center">
-                  { gameInfo.genres.map((genre) => <StyledListItem>{genre.name}</StyledListItem>) }
+                  { gameInfo.hasOwnProperty("genres") ? gameInfo.genres.map((genre) => <StyledListItem>{genre.name}</StyledListItem>) : null }
                 </div>
                 <div>
                   <p class="text-justify">
@@ -79,19 +78,20 @@ const GamePage = ({ gameID }) => {
               <div class="flex-right pad-24">
                   <h4>Publishers & Developers</h4>
                     <div>
-                      {companies.map((company) => <StyledListItem>{company.name}</StyledListItem>)}
+                      { companies == undefined ? null : companies.map((company) => <StyledListItem>{company.name}</StyledListItem>)}
                     </div>
                   <h4>Release Date</h4>
                     <StyledDate>{gameInfo.release_dates[0].human}</StyledDate>
+                    {gameInfo.release_dates == undefined ? null : <StyledDate>{gameInfo.release_dates[0].human}</StyledDate>}
                   <h4>Platforms</h4>
-                    {gameInfo.platforms.map((platform) => <StyledListItem>{platform.abbreviation}</StyledListItem>)}
+                    {gameInfo.platforms == null ? null : gameInfo.platforms.map((platform) => <StyledListItem>{platform.abbreviation}</StyledListItem>)}
             </div>
             </div>
             <div class="similar-games">
               <h3>Similar Games</h3>
               <div>
                 <div className="grid">
-                  {similarGames.map((game) => (
+                  { similarGames == null ? null : similarGames.map((game) => (
                       <GameCard
                         gameName={game.name}
                         imageUrl={getCoverSizeBig(game.cover ? game.cover.url : `${NoImage}`)}
@@ -107,7 +107,6 @@ const GamePage = ({ gameID }) => {
   }
 
   return ( loading ? <Spinner /> : gameInfoMain() );
-
 };
 
 export default GamePage;

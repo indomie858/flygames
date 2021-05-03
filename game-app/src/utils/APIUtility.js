@@ -60,10 +60,19 @@ class APIUtility {
     await this.setToken()
 
     let companyIDs = []
-    for (const involvedCompany of involvedCompanies) {
-      companyIDs.push(involvedCompany.company)
+    let companyIDStrings;
+
+    if (involvedCompanies != undefined) {
+      for (const involvedCompany of involvedCompanies) {
+        companyIDs.push(involvedCompany.company)
+      }
+
+      companyIDStrings = companyIDs.join(",")
     }
-    let companyIDStrings = companyIDs.join(",")
+    else {
+      companyIDStrings = ""
+    }
+
     let body = `
       fields name;
       where id = (${companyIDStrings});
@@ -72,7 +81,6 @@ class APIUtility {
     return companyObjects
   }
 
-  
   async makeCompanyRequest(body) {
     return axios
       .post(
@@ -94,8 +102,6 @@ class APIUtility {
         console.log(error);
       });
   }
-
-
 
   async getTop10Games() {
     // Gets the top 10 games,
@@ -163,8 +169,9 @@ class APIUtility {
     // and returns a response containing game objects.
     await this.setToken();
 
-    let gameIDString = gameIDs.join(",")
-    
+    let IDString = gameIDs == undefined ?  "" : gameIDs.join(",")
+    let gameIDString = gameIDs == undefined ?  "" : gameIDs.join(",")
+
     const body = `
       fields name, cover.url, rating, total_rating, release_dates.human;
       limit 10;
@@ -172,7 +179,6 @@ class APIUtility {
     `
     return this.makeRequest(body)
   }
-
 
   async makeRequest(bodyArg) {
     // Makes a request to the games endpoint.
@@ -201,7 +207,6 @@ class APIUtility {
         console.log(error);
       });
   }
-
 }
 
 export default APIUtility;
