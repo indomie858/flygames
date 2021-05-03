@@ -40,7 +40,7 @@ class APIUtility {
     const body = `
       fields name, 
       summary, 
-      aggregated_rating,
+      total_rating,
       similar_games, 
       screenshots.url,
       involved_companies.company,
@@ -50,6 +50,8 @@ class APIUtility {
       where id = ${gameID};
     `
     let gameFields = await this.makeRequest(body)
+    console.log("game api request")
+    console.log(gameFields)
     return gameFields
   }
 
