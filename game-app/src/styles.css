@@ -5,7 +5,8 @@ html {
 
 body {
   /* background: #52deff; */
-  background: #a8b3ba;
+  /* background: #a8b3ba; */
+  background: #ff455c;
 }
 
 h1 {
@@ -20,7 +21,6 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 0 10%;
-  background: #ff455c;
 }
 
 .nav-bar-left {
@@ -44,12 +44,18 @@ h1 {
   width: 30%;
   padding: 15px 10px;
   font-style: italic;
+  border: none;
+  margin-right: 5px;
+  border-radius: 10px;
 }
 
 .categories {
+  border: none;
   background: #eef6ff;
   width: 30%;
-  padding: 15px 10px;
+  padding: 14px 10px;
+  margin-right: 5px;
+  border-radius: 10px;
 }
 /******************************************************/
 
