@@ -86,6 +86,7 @@ html {
 }
 
 .flex-justify-center {
+  display: flex;
   justify-content: center;
 }
 
@@ -98,4 +99,25 @@ html {
     border: 3px solid #52deff;
     border-radius: 10px;
     padding: 15px 10px;
+}
+
+
+/**** Generic paddings/margins **********/
+.pad-24 {
+  padding: 24px;
+}
+
+.margin-24 {
+  margin: 24px;
+}
+
+
+/**** Text gemerics */
+
+.text-center {
+  text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
 }
