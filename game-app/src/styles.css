@@ -1,12 +1,13 @@
 html {
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
+  background: linear-gradient(to right, #52deff, #ff455c);
+  height: 100%;
 }
 
 body {
   /* background: #52deff; */
   /* background: #a8b3ba; */
-  background: #ff455c;
 }
 
 h1 {
