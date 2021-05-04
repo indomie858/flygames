@@ -34,8 +34,8 @@ jobs:
           npm install
           npm run-script build
         env:
-          REACT_APP_APIKey: ${{ secrets.REACT_APP_APIKey }}
-          REACT_APP_APISecret: ${{ secrets.REACT_APP_APISecret }}
+          REACT_APP_APIKey: ${{ secrets.REACT_APP_IGDB_CLIENT_ID }}
+          REACT_APP_APISecret: ${{ secrets.REACT_APP_IGDB_CLIENT_SECRET }}
           
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
