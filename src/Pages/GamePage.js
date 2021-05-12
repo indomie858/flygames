@@ -7,6 +7,7 @@ import Rating from "../Components/Rating";
 import NoImage from "../images/no-image-available.png";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
+import { Link } from "@reach/router";
 
 const StyledListItem = styled.div`
   border: 2px solid #35373e;
@@ -66,7 +67,7 @@ const GamePage = ({ gameID }) => {
                   {gameInfo.name}
                 </h1>
                 <div class="flex-justify-center">
-                  { gameInfo.hasOwnProperty("genres") ? gameInfo.genres.map((genre) => <StyledListItem>{genre.name}</StyledListItem>) : null }
+                  { gameInfo.hasOwnProperty("genres") ? gameInfo.genres.map((genre) => <Link to={`/searchResults/bygenre/${genre.name}`}><StyledListItem>{genre.name}</StyledListItem></Link>) : null }
                 </div>
                 <div>
                   <p class="text-justify">

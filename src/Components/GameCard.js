@@ -26,7 +26,7 @@ const GameCard = ({ gameName, imageUrl, gameRating, gameID }) => {
     <>
       <StyledGameCard>
         <Link to={`/${gameID}`}>
-          <img src={imageUrl} alt={gameName} />
+          <img src={imageUrl} alt={gameName} title={gameName}/>
         </Link>
       </StyledGameCard>
     </>

@@ -24,12 +24,6 @@ const Navbar = () => {
       navigate(`/searchResults/${inputText}/${genre}`);
     }
     
-    // if (inputText && !genre) {
-    //   navigate(`/searchResults/${inputText}`);
-    // } else {
-    //   navigate(`/searchResults/${inputText}+${genre}`);
-    // }
-    
     //clears search when submit is clicked
     setInputText('');
   }
