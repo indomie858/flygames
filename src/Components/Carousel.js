@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Spinner from "../Components/Spinner";
 
 export const StyledCarousel = styled.div`
+    background: black;
     max-width: 1280px;
     margin: 0 auto;
     position: relative;
