@@ -137,6 +137,7 @@ class APIUtility {
         total_rating, 
         release_dates.human, 
         genres.name; 
+        where total_rating != null;
       limit 100;`;
 
     return this.makeRequest(body);
