@@ -49,7 +49,6 @@ const SearchPage = ({ gameTitle, gameGenre }) => {
     return (
         <>
             <h1>Search Results {gameTitle === 'bygenre' ? 'Genre:' : `${gameTitle}`} {gameGenre}</h1>
-            {games.length > 0 ? '' : <StyledMessage>No games found</StyledMessage>}
             <div className="grid">
                 {games.length > 0 ? games.map((game) => (
                     <GameCard
@@ -61,6 +60,7 @@ const SearchPage = ({ gameTitle, gameGenre }) => {
                 )) : ''}
             </div>
             {loading && <Spinner />}
+            {(games.length > 0 && !loading) ? '' : <StyledMessage>No games found</StyledMessage>}
         </>
     );
 };
