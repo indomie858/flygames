@@ -110,8 +110,15 @@ class APIUtility {
     await this.setToken();
 
     // This is where we can tweak the API call to get different results.
-    const body =
-      "fields name, cover.url, rating, total_rating, release_dates.human;where total_rating > 90 & release_dates.date > 1609459231;sort total_rating desc;limit 10;";
+    const body = `
+      fields name,
+        cover.url, 
+        rating, 
+        total_rating, 
+        release_dates.human;
+      where total_rating > 90 & release_dates.date > 1609459231;
+      sort total_rating desc;
+      limit 10;`;
     return this.makeRequest(body);
   }
 
@@ -123,7 +130,14 @@ class APIUtility {
 
     // This is where we can tweak the API call to get different results.
     const body =
-      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; limit 40;`;
+      `search "${gameTitle}"; 
+      fields name, 
+        cover.url, 
+        rating, 
+        total_rating, 
+        release_dates.human, 
+        genres.name; 
+      limit 100;`;
 
     return this.makeRequest(body);
   }
@@ -136,11 +150,27 @@ class APIUtility {
 
     // This is where we can tweak the API call to get different results.
     let body =
-      `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; where genres.name = "${genre}"; limit 50;`;
+      `search "${gameTitle}"; 
+      fields name, 
+        cover.url, 
+        rating, 
+        total_rating, 
+        release_dates.human, 
+        genres.name;
+      where genres.name = "${genre}" & total_rating != null; 
+      limit 100;`;
 
     if (genre === 'all') {
       body =
-        `search "${gameTitle}"; fields name, cover.url, rating, total_rating, release_dates.human, genres.name; limit 50;`;
+        `search "${gameTitle}"; 
+        fields name, 
+          cover.url, 
+          rating, 
+          total_rating, 
+          release_dates.human, 
+          genres.name; 
+        where total_rating != null;
+        limit 100;`;
     }
 
     return this.makeRequest(body);
@@ -154,11 +184,17 @@ class APIUtility {
 
     // This is where we can tweak the API call to get different results.
     let body =
-      `fields name, cover.url, rating, total_rating, release_dates.human, genres.name; where genres.name = "${genre}"; limit 50;`;
+      `fields name, cover.url, rating, total_rating, release_dates.human, genres.name; 
+      sort total_rating desc;
+      where genres.name = "${genre}" & total_rating != null; 
+      limit 100;`;
 
     if (genre === 'all') {
       body =
-        "fields name, cover.url, rating, total_rating, release_dates.human; sort total_rating desc;limit 50;";
+        `fields name, cover.url, rating, total_rating, release_dates.human; 
+        sort total_rating desc; 
+        where total_rating != null; 
+        limit 100;`;
     }
 
     return this.makeRequest(body);
@@ -169,8 +205,8 @@ class APIUtility {
     // and returns a response containing game objects.
     await this.setToken();
 
-    let IDString = gameIDs == undefined ?  "" : gameIDs.join(",")
-    let gameIDString = gameIDs == undefined ?  "" : gameIDs.join(",")
+    let IDString = gameIDs == undefined ? "" : gameIDs.join(",")
+    let gameIDString = gameIDs == undefined ? "" : gameIDs.join(",")
 
     const body = `
       fields name, cover.url, rating, total_rating, release_dates.human;
