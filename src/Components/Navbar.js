@@ -7,13 +7,10 @@ import { Link } from "@reach/router";
 const Navbar = () => {
   // state for search bar input
   const [inputText, setInputText] = useState('');
-
+  // state for game genre option select
   const [genre, setGenre] = useState('all');
 
   const onSubmit = (e) => {
-    // comment this line if we want the search to refresh the page when pressing submit
-    //e.preventDefault();
-
     // checks if search and/or genre category has been filled. navigates to correct url
     if (!inputText && !genre) {
       e.preventDefault();
@@ -34,18 +31,16 @@ const Navbar = () => {
         <Link to={'/'}><img src={Logo} alt="FlyGames" className="logo" ></img></Link>
       </div>
       <div className="nav-bar-right">
-        {/* <div>Search bar</div> */}
-        {/* <div>dropdown</div> */}
-
         {/* form for searching games */}
         <form onSubmit={onSubmit}>
+          {/* input textbox for searching */}
           <input
             className="search"
             type='text'
             placeholder='Search'
             value={inputText}
             onChange={(e) => setInputText(e.target.value)} />
-
+          {/* dropdown menu with game genres */}
           <select className='categories' id="categories" value={genre} onChange={(e) => setGenre(e.target.value)}>
             <option value="all">All Genres</option>
             <option value="Adventure">Adventure</option>
