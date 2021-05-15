@@ -19,8 +19,10 @@ const Navbar = () => {
       e.preventDefault();
       alert('Please enter title/keyword, or select a category');
     } else if (!inputText && genre) {
+      // Reference for navigate function https://reach.tech/router/api/navigate
       navigate(`/searchResults/bygenre/${genre}`);
     } else {
+      // Reference for navigate function https://reach.tech/router/api/navigate
       navigate(`/searchResults/${inputText}/${genre}`);
     }
     
@@ -37,6 +39,7 @@ const Navbar = () => {
   return (
     <div className="nav-bar">
       <div className="nav-bar-left">
+        {/* Reference for link: https://reach.tech/router/tutorial/03-link */}
         <Link to={'/'}><img src={Logo} alt="FlyGames" className="logo" ></img></Link>
       </div>
       <div className="nav-bar-right">
