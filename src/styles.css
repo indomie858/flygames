@@ -5,9 +5,8 @@ html {
   height: 100%;
 }
 
-body {
-  /* background: #52deff; */
-  /* background: #a8b3ba; */
+h1, h2, h3, h4, h5 {
+  font-family: 'Audiowide', "Roboto", sans-serif;
 }
 
 h1 {
@@ -104,6 +103,7 @@ h1 {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 
