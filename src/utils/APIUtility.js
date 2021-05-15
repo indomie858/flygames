@@ -1,6 +1,7 @@
 const CLIENT_ID = process.env.REACT_APP_IGDB_CLIENT_ID;
 const CLIENT_SECRET = process.env.REACT_APP_IGDB_CLIENT_SECRET;
 
+//Reference for axios https://github.com/axios/axios
 let axios = require("axios").default;
 
 class APIUtility {
@@ -21,6 +22,7 @@ class APIUtility {
 
   requestNewToken() {
     // Return a fulfilled promise containing the access token.
+    //Reference for axios https://github.com/axios/axios
     return axios
       .post("https://id.twitch.tv/oauth2/token", null, {
         params: {
@@ -127,8 +129,9 @@ class APIUtility {
     // for use in search bar
 
     await this.setToken();
-
-    // This is where we can tweak the API call to get different results.
+  
+    // This is where we can tweak the API call to get different results. 
+    // See https://api-docs.igdb.com/#about for reference
     const body =
       `search "${gameTitle}"; 
       fields name, 
@@ -223,7 +226,7 @@ class APIUtility {
     await this.setToken();
 
     const body = bodyArg;
-
+    //Reference for axios https://github.com/axios/axios
     return axios
       .post(
         "https://flygame-igdb-proxy.herokuapp.com/https://api.igdb.com/v4/games",
