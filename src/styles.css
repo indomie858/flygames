@@ -20,7 +20,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10%;
+  padding: 10px 10%;
 }
 
 .nav-bar-left {
@@ -34,6 +34,8 @@ h1 {
   align-items: center;
   justify-content: space-between;
 }
+
+
 
 .logo {
   width: 100px;
@@ -97,18 +99,31 @@ h1 {
 /**************** Game Page *******************/
 
 .main-container {
-  background: #eef6ff;
+  background: #555760;
   max-width: 1280px;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   box-sizing: border-box;
+  padding: 40px;
+  color: #fff;
 }
 
 
-.horizontal-flex {
-  display: flex;
+@media (min-width: 768px) {
+  .horizontal-flex {
+    display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .flex-left, .flex-right {
+    text-align: center;
+  }
+  .horizontal-flex, h3 {
+    text-align: center;
+  }
 }
 
 .flex-left {
@@ -141,7 +156,7 @@ h1 {
 
 /**** Generic paddings/margins **********/
 .pad-24 {
-  padding: 24px;
+  padding: 0 24px;;
 }
 
 .margin-24 {
@@ -157,4 +172,28 @@ h1 {
 
 .text-justify {
   text-align: justify;
+}
+
+
+/** More media queries */ 
+
+/* Vertical nav bar on mobile */
+@media (max-width: 767px) {
+  .nav-bar {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search, .categories {
+    width: 100%;
+    margin: 5px;
+    box-sizing: border-box;
+  }
 }

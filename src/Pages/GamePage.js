@@ -10,8 +10,10 @@ import styled from "styled-components";
 import { Link } from "@reach/router";
 
 const StyledListItem = styled.div`
-  border: 2px solid #35373e;
-  background-color: #52deff;
+  border: 2px solid  #52deff;
+  background-color: #fff148;
+  color: #000;
+  font-weight: bold;
   padding: 10px;
   margin: 10px;
   border-radius: 20px;
