@@ -35,7 +35,9 @@ h1 {
   justify-content: space-between;
 }
 
-
+.logoTitle {
+  font-family: 'Press Start 2P', 'Audiowide', "Roboto", sans-serif;
+}
 
 .logo {
   width: 100px;
