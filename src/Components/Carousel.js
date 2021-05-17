@@ -92,13 +92,13 @@ const Carousel = (props) => {
     //not found image is a public domain placeholder
     return loading ? <Spinner /> : <StyledCarousel>
         <button class="button-styled button-left" onClick={prevScreen}>
-            &lt;
+        <i class="fas fa-arrow-left"></i>
         </button>
         <div className="carousel-flex">
             <img src={props.screenshots == undefined ? "https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg" : getScreenShot720p(props.screenshots[selectedScreenIndex].url)} />
         </div>
         <button class="button-styled button-right" onClick={nextScreen}>
-            &gt;
+            <i class="fas fa-arrow-right"></i>
         </button>
     </StyledCarousel>
 }
