@@ -18,6 +18,7 @@ COMP 484 Final Project
 
 ### Deployment
 Website can be seen at https://flygames.herokuapp.com/
+> Note: We are using the free plan for Heroku deployment. This means that our website is not running 24/7. Please give it a few minutes for Heroku dyno to spool up after clicking on the link. Once page is loaded for the first time, then subsequent loads will be significantly faster.
 
 ### Color pallete
 ```
