@@ -143,6 +143,14 @@ h1 {
   justify-content: center;
 }
 
+/* Column display for mobile */
+@media (max-width: 767px) {
+    .flex-justify-center { 
+      flex-direction: column;
+  }
+}
+
+
 
 /**************** Button Generic  *******************/
 .button-styled {
