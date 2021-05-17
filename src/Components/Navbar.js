@@ -32,7 +32,7 @@ const Navbar = () => {
       <div className="nav-bar-left">
         {/* Reference for link: https://reach.tech/router/tutorial/03-link */}
         <Link to={'/'}><img src={Logo} alt="FlyGames" className="logo" ></img></Link>
-        FlyGames
+        <p className="logoTitle" >FlyGames</p>
       </div>
       <div className="nav-bar-right">
         {/* form for searching games */}
