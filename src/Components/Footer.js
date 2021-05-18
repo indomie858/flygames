@@ -6,6 +6,8 @@ import {
   faTwitter,
   faReact,
 } from "@fortawesome/free-brands-svg-icons";
+import { faGamepad } from "@fortawesome/free-solid-svg-icons";
+
 
 const StyledFooter = styled.footer`
   border-radius: 25px;
@@ -48,6 +50,13 @@ const Footer = () => {
           rel="noreferrer"
         >
           <FontAwesomeIcon icon={faYoutube} size="2x" />
+        </StyledItem>
+        <StyledItem
+          href="https://www.gamefly.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <FontAwesomeIcon icon={faGamepad} size="2x" />
         </StyledItem>
       </div>
     </StyledFooter>
